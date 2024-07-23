@@ -21,4 +21,10 @@ return [
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
     new Extend\Locales(__DIR__.'/locale'),
+
+    (new Extend\ServiceProvider())
+        ->register(Provider\IssueTrackingProvider::class),
+
+    (new Extend\Routes('forum'))
+        ->get('/issue-tracking/test', 'issue-tracking.test', Controller\TestController::class),
 ];
