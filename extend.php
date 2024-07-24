@@ -21,6 +21,8 @@ use FoskyM\IssueTracking\Modle\Issue;
 use Flarum\Api\Serializer\DiscussionSerializer;
 use FoskyM\IssueTracking\Api\Serializer\IssueSerializer;
 use Flarum\Post\Event\Posted;
+use Flarum\Discussion\Filter\DiscussionFilterer;
+use FoskyM\IssueTracking\Filter\HideIssuesFromAllDiscussionsPage;
 
 return [
     (new Extend\Frontend('forum'))
@@ -58,5 +60,8 @@ return [
         ->hasOne('discussion-issue', DiscussionIssueSerializer::class),
 
     (new Extend\Event)
-        ->listen(Posted::class, Listener\CreateCommentWhenPosted::class)
+        ->listen(Posted::class, Listener\CreateCommentWhenPosted::class),
+
+    (new Extend\Filter(DiscussionFilterer::class))
+        ->addFilterMutator(HideIssuesFromAllDiscussionsPage::class),
 ];
