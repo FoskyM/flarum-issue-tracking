@@ -1,5 +1,8 @@
 import app from 'flarum/admin/app';
+import SettingsPage from './components/SettingsPage';
 
 app.initializers.add('foskym/flarum-issue-tracking', () => {
-  console.log('[foskym/flarum-issue-tracking] Hello, admin!');
+  app.extensionData
+    .for('foskym-issue-tracking')
+    .registerPage(SettingsPage);
 });

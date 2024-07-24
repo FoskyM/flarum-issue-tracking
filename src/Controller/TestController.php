@@ -43,7 +43,15 @@ class TestController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
 
-        print_r($this->platformHelper->providerHelper->getProviderKeys());
+        // print_r($this->platformHelper->providerHelper->getProviderKeys());
+        // print_r($this->providerHelper->getProvider('foskym-issue-tracking-youtrack')->getSettings());
+        // print_r($this->providerHelper->getProvider(
+        //     $this->settings->get('foskym-issue-tracking.provider')
+        // )->getIssueList());
+
+        print_r($this->providerHelper->getProvider(
+            $this->settings->get('foskym-issue-tracking.provider')
+        )->getIssue('3-1'));
 
         return new JsonResponse([
             'msg' => 'success'

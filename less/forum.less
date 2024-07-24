@@ -1,0 +1,93 @@
+@import 'common/Label.less';
+
+.IssueTracking-title {
+  margin-top: 0;
+}
+
+.IssueTracking-details {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+.IssueTracking-progress {
+  height: 8px;
+  background: @control-bg;
+  border-radius: @border-radius;
+}
+
+.IssueTracking-progress--mini {
+  display: inline-block;
+  width: 100px;
+  margin: 0 6px;
+}
+
+.IssueTracking-progress--alternate {
+  background: @body-bg;
+}
+
+.IssueTracking-progress--fancy {
+  .IssueTracking-progressBar {
+    background: #65d137;
+  }
+}
+
+.IssueTracking-progressBar {
+  background: @control-color;
+  border-radius: @border-radius;
+  height: 100%;
+}
+
+.IssueTracking-issuesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Badge--issueOpen {
+  background: #41a00c;
+}
+
+.item-tasks {
+  margin-left: 6px;
+}
+
+.Badge--issueClosed {
+  background: #c71c1c;
+}
+
+@media @tablet-up {
+  .IndexPage {
+    .DiscussionListItem-title {
+      margin-right: 155px;
+    }
+    .DiscussionListItem-info > .item-issues {
+      margin-right: 0;
+      position: absolute;
+      right: 80px;
+      top: 14px;
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      transition: max-width 0.2s ease-in-out, -webkit-mask-image 0.2s;
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 140px, rgba(0,0,0,0) 150px);
+      font-size: 12px;
+
+      &:hover {
+        max-width: 400px;
+        -webkit-mask-image: none;
+      }
+    }
+  }
+}
+
+.IssueTracking-Badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  > .icon {
+    fill: #fff;
+  }
+}
