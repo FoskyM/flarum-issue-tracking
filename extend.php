@@ -37,9 +37,6 @@ return [
     (new Extend\ServiceProvider())
         ->register(Provider\IssueTrackingProvider::class),
 
-    (new Extend\Routes('forum'))
-        ->get('/issue-tracking/test', 'issue-tracking.test', Controller\TestController::class),
-
     (new Extend\Routes('api'))
         ->get('/issue-tracking/settings', 'issue-tracking.settings', Api\Controller\ShowProviderSettingsController::class)
         ->get('/issue-tracking-issues', 'issue-tracking.issues', Api\Controller\ListIssuesController::class)
