@@ -13,6 +13,7 @@ namespace FoskyM\IssueTracking\Api\Controller;
 
 use Flarum\Api\Controller\AbstractCreateController;
 use Flarum\Http\RequestUtil;
+use FoskyM\IssueTracking\Event\IssueCreated;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
@@ -27,19 +28,27 @@ use FoskyM\IssueTracking\Model\Issue;
 use Flarum\Discussion\Discussion;
 use Flarum\Post\CommentPost;
 use Carbon\Carbon;
+use Illuminate\Contracts\Bus\Dispatcher as BusDispatcher;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 
 class CreateIssueController extends AbstractCreateController
 {
     public $serializer = IssueSerializer::class;
     protected $settings;
+    protected $bus;
+    protected $events;
     protected $platformHelper;
     protected $providerHelper;
     public function __construct(
         SettingsRepositoryInterface $settings,
+        BusDispatcher $bus, 
+        EventDispatcher $events,
         PlatformHelper $platformHelper,
         ProviderHelper $providerHelper
     ) {
         $this->settings = $settings;
+        $this->bus = $bus;
+        $this->events = $events;
         $this->platformHelper = $platformHelper;
         $this->providerHelper = $providerHelper;
     }
@@ -93,6 +102,10 @@ class CreateIssueController extends AbstractCreateController
 
         $issue->discussion = $discussion;
         $issue->discussion_id = $discussion->id;
+
+        $this->events->dispatch(
+            new IssueCreated($actor, $issue, $discussion)
+        );
 
         return $issue;
     }
