@@ -25,7 +25,7 @@ export default class IssueComposer extends ComposerBody {
   headerItems() {
     const items = super.headerItems();
 
-    items.add('title', <h3>{app.translator.trans('foskym-issue-tracking.forum.composer.title')}</h3>, 100);
+    // items.add('title', <h3>{app.translator.trans('foskym-issue-tracking.forum.composer.title')}</h3>, 100);
 
     items.add(
       'issueTitle',
