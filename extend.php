@@ -42,7 +42,8 @@ return [
 
     (new Extend\Routes('api'))
         ->get('/issue-tracking/settings', 'issue-tracking.settings', Api\Controller\ShowProviderSettingsController::class)
-        ->get('/issue-tracking/issues', 'issue-tracking.issues', Api\Controller\ListIssuesController::class)
+        ->get('/issue-tracking-issues', 'issue-tracking.issues', Api\Controller\ListIssuesController::class)
+        ->post('/issue-tracking-issues', 'issue-tracking.create-issue', Api\Controller\CreateIssueController::class)
         ->get('/issue-tracking/issue', 'issue-tracking.issue', Api\Controller\ShowIssueController::class),
 
     (new Extend\ApiController(ListIssuesController::class))
@@ -64,4 +65,7 @@ return [
 
     (new Extend\Filter(DiscussionFilterer::class))
         ->addFilterMutator(HideIssuesFromAllDiscussionsPage::class),
+
+    (new Extend\Settings())
+        ->serializeToForum('foskym-issue-tracking.enable_create_issue', 'foskym-issue-tracking.enable_create_issue', 'boolval', false)
 ];

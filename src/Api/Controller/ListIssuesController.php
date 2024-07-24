@@ -91,6 +91,7 @@ class ListIssuesController extends AbstractListController
                 $relationship->save();
         
                 $issue->discussion = $discussion;
+                $issue->discussion_id = $discussion->id;
             }
 
             return $issue;

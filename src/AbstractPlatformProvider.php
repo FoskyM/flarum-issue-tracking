@@ -46,7 +46,7 @@ abstract class AbstractPlatformProvider
 
     public abstract function getIssue(string $issueId): AbstractIssue;
 
-    public abstract function createIssue(User $actor, string $title, string $description): bool;
+    public abstract function createIssue(User $actor, string $title, string $description): AbstractIssue;
 
     public abstract function createComment(User $actor, string $issueId, string $content): bool;
 }

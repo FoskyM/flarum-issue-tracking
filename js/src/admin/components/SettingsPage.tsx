@@ -67,6 +67,12 @@ export default class SettingsPage extends ExtensionPage {
 
         {this.buildSettingComponent({
           type: 'boolean',
+          setting: 'foskym-issue-tracking.enable_create_issue',
+          label: app.translator.trans('foskym-issue-tracking.admin.enable_create_issue_label'),
+        })}
+
+        {this.buildSettingComponent({
+          type: 'boolean',
           setting: 'foskym-issue-tracking.enable_comment_sync',
           label: app.translator.trans('foskym-issue-tracking.admin.enable_comment_sync_label'),
         })}

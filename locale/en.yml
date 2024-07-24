@@ -4,7 +4,16 @@ foskym-issue-tracking:
   admin:
     provider_heading: Platform Provider
     enable_comment_sync_label: Create comments in the issue tracker when a post is created
+    enable_create_issue_label: Allow users to create issues in Flarum
 
   forum:
     title: Issue Tracking
     last_updated: Last updated {time}
+    new_issue: New Issue
+    cannot_create_issue: Read Only
+    composer:
+      title: Create a new issue
+      title_placeholder: Issue Title
+      body_placeholder: Issue Description
+      submit_button: Submit Issue
+      discard_confirmation: Are you sure you want to discard this issue?

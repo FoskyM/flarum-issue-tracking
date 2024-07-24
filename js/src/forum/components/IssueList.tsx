@@ -50,7 +50,7 @@ export default class IssueList extends Component {
   refresh() {
     this.loading = true;
     this.issues = [];
-    app.store.find('issue-tracking/issues').then((issues: any) => {
+    app.store.find('issue-tracking-issues').then((issues: any) => {
       this.issues = issues;
       this.loading = false;
       m.redraw();

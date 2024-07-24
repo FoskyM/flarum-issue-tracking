@@ -13,4 +13,5 @@ export default class Issue extends Model {
   updated_at = Model.attribute('updated_at', Model.transformDate);
   resolved_at = Model.attribute('resolved_at', Model.transformDate);
   discussion = Model.hasOne('discussion');
+  discussion_id = Model.attribute('discussion_id');
 }
