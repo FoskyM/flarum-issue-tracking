@@ -19,7 +19,7 @@ app.initializers.add('foskym/flarum-issue-tracking', () => {
   extend(IndexPage.prototype, 'navItems', (navItems) => {
     navItems.add(
       'issues',
-      <LinkButton href={app.route('issues')} icon="fas fa-tasks">
+      <LinkButton href={app.route('issues')} icon="fas fa-bug">
         {app.translator.trans('foskym-issue-tracking.forum.title')}
       </LinkButton>,
       100

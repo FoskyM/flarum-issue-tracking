@@ -2,12 +2,16 @@
     "name": "foskym/flarum-issue-tracking",
     "description": "Issue tracking in Flarum.",
     "keywords": [
-        "flarum"
+        "flarum",
+        "extension",
+        "issue",
+        "tracking",
+        "bug"
     ],
     "type": "flarum-extension",
     "license": "MIT",
     "require": {
-        "flarum/core": "^1.2.0"
+        "flarum/core": "^1.8.0"
     },
     "authors": [
         {
@@ -24,11 +28,11 @@
     "extra": {
         "flarum-extension": {
             "title": "Issue Tracking",
-            "category": "",
+            "category": "feature",
             "icon": {
-                "name": "",
-                "color": "",
-                "backgroundColor": ""
+                "name": "fas fa-bug",
+                "color": "#ffffff",
+                "backgroundColor": "#f44336"
             }
         },
         "flarum-cli": {
