@@ -39,6 +39,7 @@ return [
 
     (new Extend\Routes('api'))
         ->get('/issue-tracking/settings', 'issue-tracking.settings', Api\Controller\ShowProviderSettingsController::class)
+        ->post('/issue-tracking/settings/test', 'issue-tracking.settings.test', Api\Controller\TestConnectionController::class)
         ->get('/issue-tracking-issues', 'issue-tracking.issues', Api\Controller\ListIssuesController::class)
         ->post('/issue-tracking-issues', 'issue-tracking.create-issue', Api\Controller\CreateIssueController::class)
         ->get('/issue-tracking/issue', 'issue-tracking.issue', Api\Controller\ShowIssueController::class)

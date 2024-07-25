@@ -2,9 +2,10 @@ import app from 'flarum/admin/app';
 import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 import LoadingIndicator from 'flarum/common/components/LoadingIndicator';
 import Alert from 'flarum/common/components/Alert';
+import Button from 'flarum/common/components/Button';
 import FieldSet from 'flarum/common/components/FieldSet';
 import type { SaveSubmitEvent } from 'flarum/admin/components/AdminPage';
-
+import type { AlertIdentifier } from 'flarum/common/states/AlertManagerState';
 import type Mithril from 'mithril';
 
 export interface ProviderSettings {
@@ -19,6 +20,8 @@ export interface ProviderSettings {
 export default class SettingsPage extends ExtensionPage {
   providerFields?: Record<string, any>;
   status?: { errors: any };
+  testing = false;
+  testSuccessAlert?: AlertIdentifier | null = null;
 
   oninit(vnode: Mithril.Vnode) {
     super.oninit(vnode);
@@ -109,9 +112,39 @@ export default class SettingsPage extends ExtensionPage {
             </FieldSet>
           )}
           {this.submitButton()}
+
+          <FieldSet
+            label={app.translator.trans('foskym-issue-tracking.admin.action.heading')}
+            className="FieldSet--col IssueTrackingPage-IssueTrackingSettings"
+          >
+            <Button className="Button Button--primary" disabled={this.testing || this.isChanged()} onclick={() => this.testConnection()}>
+              {app.translator.trans('foskym-issue-tracking.admin.action.test_connection_button')}
+            </Button>
+          </FieldSet>
         </div>
       </div>
     );
+  }
+
+  testConnection() {
+    this.testing = true;
+
+    if (this.testSuccessAlert) app.alerts.dismiss(this.testSuccessAlert);
+    
+    app
+      .request({
+        method: 'POST',
+        url: app.forum.attribute('apiUrl') + '/issue-tracking/settings/test',
+      })
+      .then((response) => {
+        this.testing = false;
+        this.testSuccessAlert = app.alerts.show({ type: 'success' }, app.translator.trans('foskym-issue-tracking.admin.action.test_connection_success'));
+      })
+      .catch((error) => {
+        this.testing = false;
+        m.redraw();
+        throw error;
+      });
   }
 
   saveSettings(e: SaveSubmitEvent) {

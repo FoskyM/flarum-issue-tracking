@@ -5,6 +5,11 @@ foskym-issue-tracking:
     enable_create_issue_label: 允许用户在 Flarum 中创建问题
     enable_auto_import_label: 阅读问题列表时自动将平台的问题导入到 Flarum
 
+    action:
+      heading: 操作
+      test_connection_button: 测试连接
+      test_connection_success: 连接成功
+
   forum:
     title: 问题跟踪
     last_updated: 最后更新于 {time}

@@ -30,7 +30,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Carbon\Carbon;
 
-class ShowProgressController implements RequestHandlerInterface
+class TestConnectionController implements RequestHandlerInterface
 {
     protected $settings;
     protected $platformHelper;
@@ -52,22 +52,17 @@ class ShowProgressController implements RequestHandlerInterface
         $provider = $this->settings->get('foskym-issue-tracking.provider');
 
         try {
-            $progress = $this->providerHelper->getProvider($provider)
-                ->getLatestProgress();
-            $updated_at = new Carbon($progress->updated_at);
-            // format it to RFC3339
-            $progress->updated_at = $updated_at->toRfc3339String();
-
-            return new JsonResponse([
-                'updated_at' => $progress->updated_at,
-                'resolved' => $progress->resolved,
-                'unresolved' => $progress->unresolved,
-                'total' => $progress->total,
-            ]);
+            $can = $this->providerHelper->getProvider($provider)
+                ->testConnection();
+            if (!$can) {
+                throw new \Exception('Connection failed');
+            }
         } catch (\Exception $e) {
-            return new JsonResponse([
-                'error' => 'Progress not found',
-            ], 404);
+            throw new \Exception('Connection failed');
         }
+
+        return new JsonResponse([
+            'message' => 'Connection successful'
+        ]);
     }
 }

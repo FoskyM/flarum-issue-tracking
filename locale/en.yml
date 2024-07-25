@@ -7,6 +7,11 @@ foskym-issue-tracking:
     enable_create_issue_label: Allow users to create issues in Flarum
     enable_auto_import_label: Automatically import issues to Flarum while reading issues
 
+    action:
+      heading: Action
+      test_connection_button: Test Connection
+      test_connection_success: Connection successful
+
   forum:
     title: Issue Tracking
     last_updated: Last updated {time}

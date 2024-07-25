@@ -74,6 +74,12 @@ abstract class AbstractPlatformProvider
     public abstract function availableSettings(): array;
 
     /**
+     * Test the connection to the platform.
+     * @return bool
+     */
+    public abstract function testConnection(): bool;
+
+    /**
      * Get the list of issues.
      * Array of AbstractIssue.
      * @param string $sort
