@@ -23,6 +23,10 @@ foskym-issue-tracking:
 
   forum:
     title: Issue Tracking
+
+    header:
+      back_to_issues_tooltip: Back to Issues
+
     last_updated: Last updated {time}
     issue_opened_by: Issue opened on {time} by {username}
     progress: Progress

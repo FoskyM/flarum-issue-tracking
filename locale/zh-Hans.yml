@@ -21,6 +21,10 @@ foskym-issue-tracking:
 
   forum:
     title: 问题跟踪
+    
+    header:
+      back_to_issues_tooltip: 返回问题列表
+
     last_updated: 最后更新于 {time}
     issue_opened_by: 问题由 {username} 创建于 {time}
     progress: 进度

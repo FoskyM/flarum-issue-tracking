@@ -25,6 +25,8 @@ export default class IssuePage extends Page {
   oninit(vnode: Mithril.Vnode) {
     super.oninit(vnode);
 
+    app.history.push('issues', app.translator.trans('foskym-issue-tracking.forum.header.back_to_issues_tooltip'));
+
     app.setTitle(extractText(app.translator.trans('foskym-issue-tracking.forum.title')));
     app.setTitleCount(0);
 
