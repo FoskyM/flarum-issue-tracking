@@ -61,7 +61,9 @@ class ShowIssueController extends AbstractShowController
 
             return $issue;
         } catch (\Exception $e) {
-            
+            $issue = new AbstractIssue();
+            $issue = new Issue($issue);
+            return $issue;
         }
     }
 }

@@ -45,13 +45,17 @@ class ShowProviderSettingsController extends AbstractShowController
             ];
         }
 
-        if ($settings->get('foskym-issue-tracking.provider') === null) {
+        if ($settings->get('foskym-issue-tracking.provider') === null && count($providers) > 0) {
             $settings->set('foskym-issue-tracking.provider', array_keys($providers)[0]);
         }
 
-        $provider = $providerHelpers->getProvider($settings->get('foskym-issue-tracking.provider'));
-
-        $errors = $provider->validateSettings($settings, $validator);
+        try {
+            $provider = $providerHelpers->getProvider($settings->get('foskym-issue-tracking.provider'));
+            $errors = $provider->validateSettings($settings, $validator);
+        } catch (\Exception $e) {
+            $provider = null;
+            $errors = [];
+        }
 
         return [
             'providers' => $providers,

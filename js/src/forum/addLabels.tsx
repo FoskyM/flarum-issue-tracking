@@ -12,10 +12,11 @@ export default function () {
   let loading = true;
   extend(DiscussionHero.prototype, 'oninit', function () {
     app.store.find('issue-tracking/issue?id=' + this.attrs.discussion.id()).then((data: any) => {
-      console.log(data);
       issue = data;
       loading = false;
-      m.redraw();
+      if (issue.id() !== null) {
+        m.redraw();
+      }
     });
   });
 
@@ -23,7 +24,7 @@ export default function () {
     if (loading) {
       return;
     }
-    if (!issue) {
+    if (issue.id() === null) {
       return;
     }
     items.add(

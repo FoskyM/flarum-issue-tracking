@@ -46,3 +46,7 @@ foskym-issue-tracking:
       resolved: 已解决
       tasks_done: '{number} / {total}'
       complete: '{progress} 完成'
+
+    provider:
+      error:
+        title: 提供者错误

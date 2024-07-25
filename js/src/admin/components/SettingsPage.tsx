@@ -55,7 +55,7 @@ export default class SettingsPage extends ExtensionPage {
       return <LoadingIndicator />;
     }
 
-    const fields = this.providerFields![this.setting('foskym-issue-tracking.provider')()]['settings'];
+    const fields = this.providerFields![this.setting('foskym-issue-tracking.provider')()]?.settings || {};
     const fieldKeys = Object.keys(fields);
 
     const options = Object.keys(this.providerFields!).reduce((memo, key) => ({ ...memo, [key]: this.providerFields![key].name }), {});

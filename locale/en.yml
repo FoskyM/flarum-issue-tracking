@@ -48,3 +48,7 @@ foskym-issue-tracking:
       resolved: Resolved
       tasks_done: '{number} of {total}'
       complete: '{progress} Complete'
+
+    provider:
+      error:
+        title: Provider Error

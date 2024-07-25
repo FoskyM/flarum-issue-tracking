@@ -60,7 +60,7 @@ class ProviderHelper
     {
         $result = $this->collection->getProvider($key);
         if ($result === false) {
-            throw new ValidationException(["provider" => $this->translator->trans("xypp-store.forum.provider.error.title")]);
+            throw new ValidationException(["provider" => $this->translator->trans("foskym-issue-tracking.forum.provider.error.title")]);
         }
         return $result;
     }
