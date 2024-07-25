@@ -16,6 +16,7 @@ use Flarum\Database\AbstractModel;
 
 class Issue extends AbstractIssue {
   public $discussion_id;
+  public $discussion;
   public function __construct($issue) {
     $this->id = $issue->id;
     $this->slug = $issue->slug;
