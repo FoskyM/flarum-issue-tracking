@@ -87,9 +87,15 @@ abstract class AbstractPlatformProvider
      * Default: 'latest'
      * Available: 'latest', 'newest', 'oldest'
      * Just: latest_updated_at, created_at, updated_at
+     * @param int $skip
+     * The number of issues to skip.
+     * Default: 0
+     * @param int $limit
+     * The number of issues to return.
+     * Default: 15
      * @return array
      */
-    public abstract function getIssueList(string $sort = 'latest'): array;
+    public abstract function getIssueList(string $sort = 'latest', int $skip = 0, int $limit = 15): array;
 
     /**
      * Get the issue by ID.

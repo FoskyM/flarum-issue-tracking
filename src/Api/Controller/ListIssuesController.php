@@ -49,8 +49,11 @@ class ListIssuesController extends AbstractListController
         $provider = $this->settings->get('foskym-issue-tracking.provider');
 
         $sort = Arr::get($request->getQueryParams(), 'sort', 'latest');
+        $offset = Arr::get($request->getQueryParams(), 'offset', 0);
+        $limit = Arr::get($request->getQueryParams(), 'limit', 15);
 
-        $issues = $this->providerHelper->getProvider($provider)->getIssueList($sort);
+        $issues = $this->providerHelper->getProvider($provider)
+            ->getIssueList($sort, $offset, $limit);
 
         $issues = array_map(function ($issue) use ($provider) {
             $issue = new Issue($issue);

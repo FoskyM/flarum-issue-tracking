@@ -12,8 +12,10 @@ import type Mithril from 'mithril';
 export default class IssueList extends Component {
   issues: any[] = [];
   loading = true;
+  hasMore = true;
   sorts = ['newest', 'oldest', 'latest'];
   current_sort = 'latest';
+  loadingNode = (<LoadingIndicator />);
 
   oninit(vnode: Mithril.Vnode) {
     super.oninit(vnode);
@@ -32,17 +34,31 @@ export default class IssueList extends Component {
       );
     });
 
+    if (this.loading) {
+      this.loadingNode = <LoadingIndicator />;
+    } else if (this.hasMore) {
+      this.loadingNode = (
+        <Button className="Button" onclick={this.loadMore.bind(this)}>
+          {app.translator.trans('core.forum.discussion_list.load_more_button')}
+        </Button>
+      );
+    } else {
+      this.loadingNode = <span></span>;
+    }
+
     return (
       <div className="IssueTracking-issues">
         <div className="IndexPage-toolbar">
           <ul className="IndexPage-toolbar-view">{listItems(this.viewItems().toArray())}</ul>
           <ul className="IndexPage-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
         </div>
-        {this.loading ? (
+        {this.loading && this.issues.length === 0 ? (
           <LoadingIndicator />
         ) : (
           <div className="IssueTracking-issuesContainer">
             <ul className="IssueTracking-issuesList">{issuesVnodes}</ul>
+
+            <div className="DiscussionList-loadMore">{this.loadingNode}</div>
           </div>
         )}
       </div>
@@ -52,13 +68,33 @@ export default class IssueList extends Component {
   refresh() {
     this.loading = true;
     this.issues = [];
-    app.store.find('issue-tracking-issues', {
-      sort: this.current_sort,
-    }).then((issues: any) => {
-      this.issues = issues;
-      this.loading = false;
-      m.redraw();
-    });
+    app.store
+      .find('issue-tracking-issues', {
+        sort: this.current_sort
+      })
+      .then((issues: any) => {
+        this.issues = issues;
+        this.loading = false;
+        m.redraw();
+      });
+  }
+
+  loadMore() {
+    this.loading = true;
+    app.store
+      .find('issue-tracking-issues', {
+        sort: this.current_sort,
+        offset: this.issues.length,
+      })
+      .then((issues: any) => {
+        if (issues.length < 15) {
+          this.hasMore = false;
+        }
+        this.issues = this.issues.concat(issues);
+        this.loading = false;
+        m.redraw();
+      }
+    );
   }
 
   changeState(sort: string) {
