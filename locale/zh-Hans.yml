@@ -9,6 +9,7 @@ foskym-issue-tracking:
     title: 问题跟踪
     last_updated: 最后更新于 {time}
     issue_opened_by: 问题由 {username} 创建于 {time}
+    progress: 进度
     new_issue: 新建问题
     cannot_create_issue: 只读
     composer:
