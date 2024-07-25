@@ -9,6 +9,15 @@ foskym-issue-tracking:
       heading: 操作
       test_connection_button: 测试连接
       test_connection_success: 连接成功
+      import_issues_button: 导入问题
+      import_issues_success: 问题导入成功
+      import_issues_confirmation: 确定要导入所有问题吗？
+      delete_imported_issues_button: 删除导入的问题
+      delete_imported_issues_success: 导入的问题删除成功
+      delete_imported_issues_confirmation: 确定要删除所有导入的问题吗？
+      delete_all_issues_button: 删除所有问题
+      delete_all_issues_success: 所有问题删除成功
+      delete_all_issues_confirmation: 确定要删除所有问题吗？
 
   forum:
     title: 问题跟踪

@@ -29,8 +29,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Carbon\Carbon;
+use Flarum\Discussion\Discussion;
 
-class TestConnectionController implements RequestHandlerInterface
+class DeleteImportedIssuesController implements RequestHandlerInterface
 {
     protected $settings;
     protected $platformHelper;
@@ -53,17 +54,21 @@ class TestConnectionController implements RequestHandlerInterface
         $provider = $this->settings->get('foskym-issue-tracking.provider');
 
         try {
-            $can = $this->providerHelper->getProvider($provider)
-                ->testConnection();
-            if (!$can) {
-                throw new \Exception('Connection failed');
+            $discussionIssues = DiscussionIssue::where('issue_provider', $provider)
+                ->where('is_imported', 1)
+                ->get();
+
+            foreach ($discussionIssues as $discussionIssue) {
+                $discussion = Discussion::find($discussionIssue->discussion_id);
+                $discussionIssue->delete();
+                $discussion->delete();
             }
         } catch (\Exception $e) {
-            throw new \Exception('Connection failed');
+            throw new \Exception('Failed to delete issues');
         }
 
         return new JsonResponse([
-            'message' => 'Connection successful'
+            'message' => 'Issues deleted'
         ]);
     }
 }

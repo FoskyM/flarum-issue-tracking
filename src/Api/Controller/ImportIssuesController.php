@@ -11,25 +11,30 @@
 
 namespace FoskyM\IssueTracking\Api\Controller;
 
-use Flarum\Api\Controller\AbstractListController;
+use Flarum\Api\Controller\AbstractShowController;
 use Flarum\Http\RequestUtil;
-use Illuminate\Support\Arr;
+use Flarum\Settings\SettingsRepositoryInterface;
+use FoskyM\IssueTracking\AbstractIssue;
+use FoskyM\IssueTracking\AbstractProgress;
+use FoskyM\IssueTracking\Helper\ProviderHelper;
+use FoskyM\IssueTracking\Helper\PlatformHelper;
+use Illuminate\Contracts\Validation\Factory;
+use FoskyM\IssueTracking\Api\Serializer\ProgressSerializer;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
-use FoskyM\IssueTracking\Api\Serializer\IssueSerializer;
-use Flarum\Settings\SettingsRepositoryInterface;
-use FoskyM\IssueTracking\Helper\PlatformHelper;
-use FoskyM\IssueTracking\Helper\ProviderHelper;
-use FoskyM\IssueTracking\Model\Issue;
+use Illuminate\Support\Arr;
 use FoskyM\IssueTracking\Model\DiscussionIssue;
+use FoskyM\IssueTracking\Model\Issue;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Laminas\Diactoros\Response\JsonResponse;
 use Flarum\User\User;
 use Flarum\Discussion\Discussion;
 use Flarum\Post\CommentPost;
 use Carbon\Carbon;
 
-class ListIssuesController extends AbstractListController
+class ImportIssuesController implements RequestHandlerInterface
 {
-    public $serializer = IssueSerializer::class;
     protected $settings;
     protected $platformHelper;
     protected $providerHelper;
@@ -42,17 +47,19 @@ class ListIssuesController extends AbstractListController
         $this->platformHelper = $platformHelper;
         $this->providerHelper = $providerHelper;
     }
-    protected function data(ServerRequestInterface $request, Document $document)
+
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $actor = RequestUtil::getActor($request);
-
+        $actor->assertAdmin();
+        
         $provider = $this->settings->get('foskym-issue-tracking.provider');
 
         $sort = Arr::get($request->getQueryParams(), 'sort', 'latest');
 
         $issues = $this->providerHelper->getProvider($provider)->getIssueList($sort);
 
-        $issues = array_map(function ($issue) use ($provider) {
+        $issues = array_map(function ($issue) use ($provider, $actor) {
             $issue = new Issue($issue);
             try {
                 $relationship = DiscussionIssue::where('issue_id', $issue->id)
@@ -62,10 +69,7 @@ class ListIssuesController extends AbstractListController
                 $issue->discussion = $relationship->discussion;
                 $issue->discussion_id = $relationship->discussion_id;
             } catch (\Exception $e) {
-                if ($this->settings->get('foskym-issue-tracking.enable_auto_import') !== '1') {
-                    return null;
-                }
-                $user = User::find(1);
+                $user = $actor;
                 $discussion = Discussion::start($issue->title, $user);
         
                 $discussion->save();
@@ -106,6 +110,8 @@ class ListIssuesController extends AbstractListController
 
         $issues = array_filter($issues);
 
-        return $issues;
+        return new JsonResponse([
+            'data' => $issues,
+        ]);
     }
 }

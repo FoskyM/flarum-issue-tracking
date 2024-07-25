@@ -11,6 +11,15 @@ foskym-issue-tracking:
       heading: Action
       test_connection_button: Test Connection
       test_connection_success: Connection successful
+      import_issues_button: Import Issues
+      import_issues_success: Issues imported successfully
+      import_issues_confirmation: Are you sure you want to import all issues?
+      delete_imported_issues_button: Delete Imported Issues
+      delete_imported_issues_success: Imported issues deleted successfully
+      delete_imported_issues_confirmation: Are you sure you want to delete all imported issues?
+      delete_all_issues_button: Delete All Issues
+      delete_all_issues_success: All issues deleted successfully
+      delete_all_issues_confirmation: Are you sure you want to delete all issues?
 
   forum:
     title: Issue Tracking

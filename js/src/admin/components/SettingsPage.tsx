@@ -7,6 +7,8 @@ import FieldSet from 'flarum/common/components/FieldSet';
 import type { SaveSubmitEvent } from 'flarum/admin/components/AdminPage';
 import type { AlertIdentifier } from 'flarum/common/states/AlertManagerState';
 import type Mithril from 'mithril';
+import icon from 'flarum/common/helpers/icon';
+import extractText from 'flarum/common/utils/extractText';
 
 export interface ProviderSettings {
   data: {
@@ -100,7 +102,11 @@ export default class SettingsPage extends ExtensionPage {
                       {this.buildSettingComponent({
                         type: typeof fieldInfo === 'string' ? 'text' : 'select',
                         label: app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_label`),
-                        help: app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`) === `${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help` ? '' : app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`),
+                        help:
+                          app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`) ===
+                          `${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`
+                            ? ''
+                            : app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`),
                         setting: this.setting(`foskym-issue-tracking.provider`)() + '.' + field,
                         options: fieldInfo,
                       })}
@@ -120,17 +126,80 @@ export default class SettingsPage extends ExtensionPage {
             <Button className="Button Button--primary" disabled={this.testing || this.isChanged()} onclick={() => this.testConnection()}>
               {app.translator.trans('foskym-issue-tracking.admin.action.test_connection_button')}
             </Button>
+
+            <Button className="Button Button--primary" onclick={() => this.importIssues()}>
+              {icon('fas fa-download')}
+              {app.translator.trans('foskym-issue-tracking.admin.action.import_issues_button')}
+            </Button>
+
+            <Button className="Button Button--primary" onclick={() => this.deleteImportedIssues()}>
+              {icon('fas fa-trash-alt')}
+              {app.translator.trans('foskym-issue-tracking.admin.action.delete_imported_issues_button')}
+            </Button>
+
+            <Button className="Button Button--danger" onclick={() => this.deleteAllIssues()}>
+              {icon('fas fa-trash-alt')}
+              {app.translator.trans('foskym-issue-tracking.admin.action.delete_all_issues_button')}
+            </Button>
           </FieldSet>
         </div>
       </div>
     );
   }
 
+  importIssues() {
+    window.confirm(extractText(app.translator.trans('foskym-issue-tracking.admin.action.import_issues_confirmation'))) &&
+      app
+        .request({
+          method: 'POST',
+          url: app.forum.attribute('apiUrl') + '/issue-tracking/issues/import',
+        })
+        .then(() => {
+          app.alerts.show({ type: 'success' }, app.translator.trans('foskym-issue-tracking.admin.action.import_issues_success'));
+        })
+        .catch((error) => {
+          m.redraw();
+          throw error;
+        });
+  }
+
+  deleteImportedIssues() {
+    window.confirm(extractText(app.translator.trans('foskym-issue-tracking.admin.action.delete_imported_issues_confirmation'))) &&
+      app
+        .request({
+          method: 'DELETE',
+          url: app.forum.attribute('apiUrl') + '/issue-tracking/issues/imported',
+        })
+        .then(() => {
+          app.alerts.show({ type: 'success' }, app.translator.trans('foskym-issue-tracking.admin.action.delete_imported_issues_success'));
+        })
+        .catch((error) => {
+          m.redraw();
+          throw error;
+        });
+  }
+
+  deleteAllIssues() {
+    window.confirm(extractText(app.translator.trans('foskym-issue-tracking.admin.action.delete_all_issues_confirmation'))) &&
+      app
+        .request({
+          method: 'DELETE',
+          url: app.forum.attribute('apiUrl') + '/issue-tracking/issues',
+        })
+        .then(() => {
+          app.alerts.show({ type: 'success' }, app.translator.trans('foskym-issue-tracking.admin.action.delete_all_issues_success'));
+        })
+        .catch((error) => {
+          m.redraw();
+          throw error;
+        });
+  }
+
   testConnection() {
     this.testing = true;
 
     if (this.testSuccessAlert) app.alerts.dismiss(this.testSuccessAlert);
-    
+
     app
       .request({
         method: 'POST',
@@ -138,7 +207,10 @@ export default class SettingsPage extends ExtensionPage {
       })
       .then((response) => {
         this.testing = false;
-        this.testSuccessAlert = app.alerts.show({ type: 'success' }, app.translator.trans('foskym-issue-tracking.admin.action.test_connection_success'));
+        this.testSuccessAlert = app.alerts.show(
+          { type: 'success' },
+          app.translator.trans('foskym-issue-tracking.admin.action.test_connection_success')
+        );
       })
       .catch((error) => {
         this.testing = false;

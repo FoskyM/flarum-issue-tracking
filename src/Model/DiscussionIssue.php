@@ -17,7 +17,7 @@ class DiscussionIssue extends AbstractModel
 {
     protected $table = 'discussion_issue';
     protected $primaryKey = 'discussion_id';
-    protected $fillable = ['discussion_id', 'issue_id', 'issue_provider', 'created_at', 'updated_at'];
+    protected $fillable = ['discussion_id', 'issue_id', 'issue_provider', 'created_at', 'updated_at', 'is_imported'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

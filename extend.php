@@ -40,6 +40,10 @@ return [
     (new Extend\Routes('api'))
         ->get('/issue-tracking/settings', 'issue-tracking.settings', Api\Controller\ShowProviderSettingsController::class)
         ->post('/issue-tracking/settings/test', 'issue-tracking.settings.test', Api\Controller\TestConnectionController::class)
+        ->delete('/issue-tracking/issues/imported', 'issue-tracking.delete-imported-issues', Api\Controller\DeleteImportedIssuesController::class)
+        ->delete('/issue-tracking/issues', 'issue-tracking.delete-issues', Api\Controller\DeleteAllIssuesController::class)
+        ->post('/issue-tracking/issues/import', 'issue-tracking.import-issues', Api\Controller\ImportIssuesController::class)
+
         ->get('/issue-tracking-issues', 'issue-tracking.issues', Api\Controller\ListIssuesController::class)
         ->post('/issue-tracking-issues', 'issue-tracking.create-issue', Api\Controller\CreateIssueController::class)
         ->get('/issue-tracking/issue', 'issue-tracking.issue', Api\Controller\ShowIssueController::class)
