@@ -73,6 +73,7 @@ export default class IssueList extends Component {
         sort: this.current_sort
       })
       .then((issues: any) => {
+        this.hasMore = issues.length === 15;
         this.issues = issues;
         this.loading = false;
         m.redraw();
