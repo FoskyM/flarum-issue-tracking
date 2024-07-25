@@ -12,6 +12,8 @@ import type Mithril from 'mithril';
 export default class IssueList extends Component {
   issues: any[] = [];
   loading = true;
+  sorts = ['newest', 'oldest', 'latest'];
+  current_sort = 'latest';
 
   oninit(vnode: Mithril.Vnode) {
     super.oninit(vnode);
@@ -50,15 +52,37 @@ export default class IssueList extends Component {
   refresh() {
     this.loading = true;
     this.issues = [];
-    app.store.find('issue-tracking-issues').then((issues: any) => {
+    app.store.find('issue-tracking-issues', {
+      sort: this.current_sort,
+    }).then((issues: any) => {
       this.issues = issues;
       this.loading = false;
       m.redraw();
     });
   }
 
+  changeState(sort: string) {
+    this.current_sort = sort;
+    this.refresh();
+  }
+
   viewItems() {
     const items = new ItemList();
+
+    items.add(
+      'sort',
+      <Dropdown buttonClassName="Button" label={app.translator.trans(`foskym-issue-tracking.forum.sort.${this.current_sort}_button`)}>
+        {this.sorts.map((sort) => {
+          const active = sort === this.current_sort;
+
+          return (
+            <Button icon={active ? 'fas fa-check' : ' '} onclick={this.changeState.bind(this, sort)} active={active}>
+              {app.translator.trans(`foskym-issue-tracking.forum.sort.${sort}_button`)}
+            </Button>
+          );
+        })}
+      </Dropdown>
+    );
 
     return items;
   }

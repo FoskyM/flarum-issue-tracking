@@ -76,9 +76,14 @@ abstract class AbstractPlatformProvider
     /**
      * Get the list of issues.
      * Array of AbstractIssue.
+     * @param string $sort
+     * The sorting method.
+     * Default: 'latest'
+     * Available: 'latest', 'newest', 'oldest'
+     * Just: latest_updated_at, created_at, updated_at
      * @return array
      */
-    public abstract function getIssueList(): array;
+    public abstract function getIssueList(string $sort = 'latest'): array;
 
     /**
      * Get the issue by ID.

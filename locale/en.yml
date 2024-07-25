@@ -17,3 +17,7 @@ foskym-issue-tracking:
       body_placeholder: Issue Description
       submit_button: Submit Issue
       discard_confirmation: Are you sure you want to discard this issue?
+    sort:
+      latest_button: Latest
+      oldest_button: Oldest
+      newest_button: Newest

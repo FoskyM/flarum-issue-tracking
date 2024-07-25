@@ -15,3 +15,7 @@ foskym-issue-tracking:
       body_placeholder: 描述
       submit_button: 提交
       discard_confirmation: 确定要放弃提交这个问题吗？
+    sort:
+      latest_button: 最后回复
+      oldest_button: 最旧
+      newest_button: 最新
