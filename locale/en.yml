@@ -9,6 +9,7 @@ foskym-issue-tracking:
   forum:
     title: Issue Tracking
     last_updated: Last updated {time}
+    issue_opened_by: Issue opened on {time} by {username}
     new_issue: New Issue
     cannot_create_issue: Read Only
     composer:

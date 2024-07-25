@@ -45,24 +45,14 @@
   margin: 0;
 }
 
-.Badge--issueOpen {
-  background: #41a00c;
-}
-
-.item-tasks {
-  margin-left: 6px;
-}
-
-.Badge--issueClosed {
-  background: #c71c1c;
-}
 
 @media @tablet-up {
   .IndexPage {
     .DiscussionListItem-title {
       margin-right: 155px;
     }
-    .DiscussionListItem-info > .item-issues {
+
+    .DiscussionListItem-info>.item-labels {
       margin-right: 0;
       position: absolute;
       right: 80px;
@@ -71,7 +61,7 @@
       white-space: nowrap;
       overflow: hidden;
       transition: max-width 0.2s ease-in-out, -webkit-mask-image 0.2s;
-      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 140px, rgba(0,0,0,0) 150px);
+      -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 140px, rgba(0, 0, 0, 0) 150px);
       font-size: 12px;
 
       &:hover {
@@ -82,12 +72,7 @@
   }
 }
 
-.IssueTracking-Badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  > .icon {
-    fill: #fff;
-  }
+.DiscussionListItem-info>.item-terminalPost span {
+  display: inline-block;
+  margin-right: 5px;
 }

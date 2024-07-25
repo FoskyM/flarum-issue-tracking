@@ -65,13 +65,22 @@ export default class IssueListItem extends Component {
 
     items.add(
       'terminalPost',
-      <span>
-        {icon('far fa-clock')} {app.translator.trans('foskym-issue-tracking.forum.last_updated', { time: humanTime(issue.updated_at()) })}
-      </span>
+      <div>
+        <span>#{issue.id()}</span>
+        <span>
+          {app.translator.trans('foskym-issue-tracking.forum.issue_opened_by', {
+            time: humanTime(issue.created_at()),
+            username: issue.discussion().user().displayName(),
+          })}
+        </span>
+        <span>
+          {icon('far fa-clock')} {app.translator.trans('foskym-issue-tracking.forum.last_updated', { time: humanTime(issue.updated_at()) })}
+        </span>
+      </div>
     );
 
     items.add(
-      'tags',
+      'labels',
       <LabelGroup>
         {['state', 'type', 'priority'].map((key) => {
           return (
