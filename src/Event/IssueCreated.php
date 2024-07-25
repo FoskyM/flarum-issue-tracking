@@ -22,8 +22,14 @@ class IssueCreated
      */
     public $actor;
 
+    /**
+     * @var \FoskyM\IssueTracking\Model\Issue
+     */
     public $issue;
 
+    /**
+     * @var Discussion
+     */
     public $discussion;
 
     /**
