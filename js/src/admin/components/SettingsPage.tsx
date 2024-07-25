@@ -97,6 +97,7 @@ export default class SettingsPage extends ExtensionPage {
                       {this.buildSettingComponent({
                         type: typeof fieldInfo === 'string' ? 'text' : 'select',
                         label: app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_label`),
+                        help: app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`) === `${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help` ? '' : app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_help`),
                         setting: this.setting(`foskym-issue-tracking.provider`)() + '.' + field,
                         options: fieldInfo,
                       })}
