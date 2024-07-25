@@ -30,16 +30,22 @@ foskym-issue-tracking:
     progress: 进度
     new_issue: 新建问题
     cannot_create_issue: 只读
+
+    discussion:
+      issue_link: 查看
+
     composer:
       title: 创建新问题
       title_placeholder: 标题
       body_placeholder: 描述
       submit_button: 提交
       discard_confirmation: 确定要放弃提交这个问题吗？
+
     sort:
       latest_button: 最后回复
       oldest_button: 最旧
       newest_button: 最新
+
     hero:
       last_updated: => foskym-issue-tracking.forum.last_updated
       unresolved: 未解决

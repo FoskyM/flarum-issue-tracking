@@ -8,7 +8,7 @@ import Button from 'flarum/common/components/Button';
 import IssuePage from './components/IssuePage';
 import IssueComposer from './components/IssueComposer';
 
-import addLabels from './addLabels';
+import addIssueInfo from './addIssueInfo';
 
 app.initializers.add('foskym/flarum-issue-tracking', () => {
   app.routes.issues = {
@@ -61,5 +61,5 @@ app.initializers.add('foskym/flarum-issue-tracking', () => {
     }
   });
 
-  addLabels();
+  addIssueInfo();
 });

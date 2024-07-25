@@ -2,6 +2,8 @@ import app from 'flarum/forum/app';
 import { extend } from 'flarum/common/extend';
 import DiscussionListItem from 'flarum/forum/components/DiscussionListItem';
 import DiscussionHero from 'flarum/forum/components/DiscussionHero';
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
+import LinkButton from 'flarum/common/components/LinkButton';
 import textContrastClass from 'flarum/common/helpers/textContrastClass';
 import classList from 'flarum/common/utils/classList';
 import Label from '../common/components/Label';
@@ -38,6 +40,26 @@ export default function () {
           );
         })}
       </LabelGroup>
+    );
+  });
+
+  extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
+    if (loading) {
+      return;
+    }
+    if (issue.id() === null) {
+      return;
+    }
+    items.add(
+      'IssueLink',
+      <LinkButton 
+        className="Button Button--block"
+        href={issue.link()}
+        external={true} 
+        icon="fas fa-bug"
+      >
+        {app.translator.trans('foskym-issue-tracking.forum.discussion.issue_link')}
+      </LinkButton>
     );
   });
 }

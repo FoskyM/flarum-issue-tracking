@@ -32,16 +32,22 @@ foskym-issue-tracking:
     progress: Progress
     new_issue: New Issue
     cannot_create_issue: Read Only
+
+    discussion:
+      issue_link: View it
+
     composer:
       title: Create a new issue
       title_placeholder: Issue Title
       body_placeholder: Issue Description
       submit_button: Submit Issue
       discard_confirmation: Are you sure you want to discard this issue?
+
     sort:
       latest_button: Latest
       oldest_button: Oldest
       newest_button: Newest
+
     hero:
       last_updated: => foskym-issue-tracking.forum.last_updated
       unresolved: Unresolved

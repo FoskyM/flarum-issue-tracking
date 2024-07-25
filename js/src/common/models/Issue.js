@@ -14,6 +14,7 @@ export default class Issue extends Model {
   resolved_at = Model.attribute('resolved_at', Model.transformDate);
   is_resolved = Model.attribute('is_resolved');
   progress = Model.attribute('progress');
+  link = Model.attribute('link');
   discussion = Model.hasOne('discussion');
   discussion_id = Model.attribute('discussion_id');
 }

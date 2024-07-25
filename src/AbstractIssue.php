@@ -25,4 +25,5 @@ class AbstractIssue {
   public $resolved_at;
   public $is_resolved;
   public $progress;
+  public $link;
 }

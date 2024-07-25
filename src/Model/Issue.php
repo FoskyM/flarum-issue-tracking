@@ -31,5 +31,6 @@ class Issue extends AbstractIssue {
     $this->resolved_at = $issue->resolved_at;
     $this->is_resolved = $issue->is_resolved;
     $this->progress = $issue->progress;
+    $this->link = $issue->link;
   }
 }
