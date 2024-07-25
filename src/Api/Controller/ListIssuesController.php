@@ -62,6 +62,9 @@ class ListIssuesController extends AbstractListController
                 $issue->discussion = $relationship->discussion;
                 $issue->discussion_id = $relationship->discussion_id;
             } catch (\Exception $e) {
+                if ($this->settings->get('foskym-issue-tracking.enable_auto_import') !== '1') {
+                    return null;
+                }
                 $user = User::find(1);
                 $discussion = Discussion::start($issue->title, $user);
         
@@ -99,6 +102,8 @@ class ListIssuesController extends AbstractListController
 
             return $issue;
         }, $issues);
+
+        $issues = array_filter($issues);
 
         return $issues;
     }

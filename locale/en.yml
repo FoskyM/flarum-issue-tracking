@@ -5,6 +5,7 @@ foskym-issue-tracking:
     provider_heading: Platform Provider
     enable_comment_sync_label: Create comments in the issue tracker when a post is created
     enable_create_issue_label: Allow users to create issues in Flarum
+    enable_auto_import_label: Automatically import issues to Flarum while reading issues
 
   forum:
     title: Issue Tracking

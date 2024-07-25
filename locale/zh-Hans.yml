@@ -3,6 +3,7 @@ foskym-issue-tracking:
     provider_heading: 平台提供者
     enable_comment_sync_label: 将 Flarum 中的评论同步至问题跟踪平台
     enable_create_issue_label: 允许用户在 Flarum 中创建问题
+    enable_auto_import_label: 阅读问题列表时自动将平台的问题导入到 Flarum
 
   forum:
     title: 问题跟踪

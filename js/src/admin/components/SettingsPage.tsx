@@ -57,49 +57,58 @@ export default class SettingsPage extends ExtensionPage {
 
     return (
       <div className="container IssueTracking-container">
-      <div className="Form">
-        {this.buildSettingComponent({
-          type: 'select',
-          setting: 'foskym-issue-tracking.provider',
-          options: options,
-          label: app.translator.trans('foskym-issue-tracking.admin.provider_heading'),
-        })}
+        <div className="Form">
+          {this.buildSettingComponent({
+            type: 'boolean',
+            setting: 'foskym-issue-tracking.enable_create_issue',
+            label: app.translator.trans('foskym-issue-tracking.admin.enable_create_issue_label'),
+          })}
 
-        {this.buildSettingComponent({
-          type: 'boolean',
-          setting: 'foskym-issue-tracking.enable_create_issue',
-          label: app.translator.trans('foskym-issue-tracking.admin.enable_create_issue_label'),
-        })}
+          {this.buildSettingComponent({
+            type: 'boolean',
+            setting: 'foskym-issue-tracking.enable_auto_import',
+            label: app.translator.trans('foskym-issue-tracking.admin.enable_auto_import_label'),
+          })}
 
-        {this.buildSettingComponent({
-          type: 'boolean',
-          setting: 'foskym-issue-tracking.enable_comment_sync',
-          label: app.translator.trans('foskym-issue-tracking.admin.enable_comment_sync_label'),
-        })}
+          {this.buildSettingComponent({
+            type: 'boolean',
+            setting: 'foskym-issue-tracking.enable_comment_sync',
+            label: app.translator.trans('foskym-issue-tracking.admin.enable_comment_sync_label'),
+          })}
 
-        {!!fieldKeys.length && (
-          <FieldSet label={app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.heading`)} className="MailPage-MailSettings">
-            <div className="MailPage-MailSettings-input">
-              {fieldKeys.map((field) => {
-                const fieldInfo = fields[field];
+          {this.buildSettingComponent({
+            type: 'select',
+            setting: 'foskym-issue-tracking.provider',
+            options: options,
+            label: app.translator.trans('foskym-issue-tracking.admin.provider_heading'),
+          })}
 
-                return (
-                  <>
-                    {this.buildSettingComponent({
-                      type: typeof fieldInfo === 'string' ? 'text' : 'select',
-                      label: app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_label`),
-                      setting: this.setting(`foskym-issue-tracking.provider`)() + '.' + field,
-                      options: fieldInfo,
-                    })}
-                    {this.status!.errors[field] && <p className="ValidationError">{this.status!.errors[field]}</p>}
-                  </>
-                );
-              })}
-            </div>
-          </FieldSet>
-        )}
-        {this.submitButton()}
-      </div>
+          {!!fieldKeys.length && (
+            <FieldSet
+              label={app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.heading`)}
+              className="IssueTrackingPage-IssueTrackingSettings"
+            >
+              <div className="IssueTrackingPage-IssueTrackingSettings-input">
+                {fieldKeys.map((field) => {
+                  const fieldInfo = fields[field];
+
+                  return (
+                    <>
+                      {this.buildSettingComponent({
+                        type: typeof fieldInfo === 'string' ? 'text' : 'select',
+                        label: app.translator.trans(`${this.setting('foskym-issue-tracking.provider')()}.admin.fields.${field}_label`),
+                        setting: this.setting(`foskym-issue-tracking.provider`)() + '.' + field,
+                        options: fieldInfo,
+                      })}
+                      {this.status!.errors[field] && <p className="ValidationError">{this.status!.errors[field]}</p>}
+                    </>
+                  );
+                })}
+              </div>
+            </FieldSet>
+          )}
+          {this.submitButton()}
+        </div>
       </div>
     );
   }
