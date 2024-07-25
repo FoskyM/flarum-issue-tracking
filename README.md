@@ -4,6 +4,9 @@
 
 A [Flarum](http://flarum.org) extension. Issue tracking in Flarum.
 
+![QQ_1721889365017](https://github.com/user-attachments/assets/1a27b9e2-c04d-492a-8a61-1be6c1bcbdca)
+
+
 ## Installation
 
 Install with composer:
@@ -24,7 +27,7 @@ php flarum cache:clear
 
 - [Packagist](https://packagist.org/packages/foskym/flarum-issue-tracking)
 - [GitHub](https://github.com/foskym/flarum-issue-tracking)
-- [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
+- [Discuss](https://discuss.flarum.org/d/34986-issue-tracking)
 
 
 ## How To Use?
