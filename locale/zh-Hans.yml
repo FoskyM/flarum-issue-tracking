@@ -20,3 +20,9 @@ foskym-issue-tracking:
       latest_button: 最后回复
       oldest_button: 最旧
       newest_button: 最新
+    hero:
+      last_updated: => foskym-issue-tracking.forum.last_updated
+      unresolved: 未解决
+      resolved: 已解决
+      tasks_done: '{number} / {total}'
+      complete: '{progress} 完成'

@@ -109,4 +109,26 @@ abstract class AbstractPlatformProvider
      * @return bool
      */
     public abstract function createComment(User $actor, string $issueId, string $content): bool;
+
+    /**
+     * Calculate the progress of an issue.
+     * The progress should be a float between 0 and 1.
+     * 0 means the issue is just created, 1 means the issue is resolved.
+     * @param \FoskyM\IssueTracking\AbstractIssue $issue
+     * @return float
+     */
+    public abstract function calculateIssueProgress(AbstractIssue $issue): float;
+
+    /**
+     * Check if the issue is resolved.
+     * @param \FoskyM\IssueTracking\AbstractIssue $issue
+     * @return bool
+     */
+    public abstract function isIssueResolved(AbstractIssue $issue): bool;
+
+    /**
+     * Get the latest progress of the project.
+     * @return \FoskyM\IssueTracking\AbstractProgress
+     */
+    public abstract function getLatestProgress(): AbstractProgress;
 }

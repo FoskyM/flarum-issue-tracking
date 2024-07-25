@@ -41,6 +41,8 @@ class IssueSerializer extends AbstractSerializer
             'created_at' => $this->formatDateTime($issue->created_at),
             'updated_at' => $this->formatDateTime($issue->updated_at),
             'resolved_at' => $this->formatDateTime($issue->resolved_at),
+            'is_resolved' => $issue->is_resolved,
+            'progress' => $issue->progress,
             'discussion_id' => $issue->discussion_id
         ];
     }

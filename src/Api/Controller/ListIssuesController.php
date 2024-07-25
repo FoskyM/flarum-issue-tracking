@@ -60,6 +60,7 @@ class ListIssuesController extends AbstractListController
                     ->firstOrFail();
 
                 $issue->discussion = $relationship->discussion;
+                $issue->discussion_id = $relationship->discussion_id;
             } catch (\Exception $e) {
                 $user = User::find(1);
                 $discussion = Discussion::start($issue->title, $user);

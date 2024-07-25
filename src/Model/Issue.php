@@ -28,5 +28,7 @@ class Issue extends AbstractIssue {
     $this->created_at = $issue->created_at;
     $this->updated_at = $issue->updated_at;
     $this->resolved_at = $issue->resolved_at;
+    $this->is_resolved = $issue->is_resolved;
+    $this->progress = $issue->progress;
   }
 }

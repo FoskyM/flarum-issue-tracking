@@ -41,7 +41,8 @@ return [
         ->get('/issue-tracking/settings', 'issue-tracking.settings', Api\Controller\ShowProviderSettingsController::class)
         ->get('/issue-tracking-issues', 'issue-tracking.issues', Api\Controller\ListIssuesController::class)
         ->post('/issue-tracking-issues', 'issue-tracking.create-issue', Api\Controller\CreateIssueController::class)
-        ->get('/issue-tracking/issue', 'issue-tracking.issue', Api\Controller\ShowIssueController::class),
+        ->get('/issue-tracking/issue', 'issue-tracking.issue', Api\Controller\ShowIssueController::class)
+        ->get('/issue-tracking/progress', 'issue-tracking.progress', Api\Controller\ShowProgressController::class),
 
     (new Extend\ApiController(ListIssuesController::class))
         ->addInclude(['discussion', 'discussion.user']),

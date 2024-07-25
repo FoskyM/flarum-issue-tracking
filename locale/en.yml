@@ -22,3 +22,9 @@ foskym-issue-tracking:
       latest_button: Latest
       oldest_button: Oldest
       newest_button: Newest
+    hero:
+      last_updated: => foskym-issue-tracking.forum.last_updated
+      unresolved: Unresolved
+      resolved: Resolved
+      tasks_done: '{number} of {total}'
+      complete: '{progress} Complete'

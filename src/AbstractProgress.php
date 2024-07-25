@@ -11,18 +11,9 @@
 
 namespace FoskyM\IssueTracking;
 
-class AbstractIssue {
-  public $id;
-  public $slug;
-  public $title;
-  public $description;
-  public $author;
-  public $state;
-  public $priority;
-  public $type;
-  public $created_at;
+class AbstractProgress {
   public $updated_at;
-  public $resolved_at;
-  public $is_resolved;
-  public $progress;
+  public int $resolved = 0;
+  public int $unresolved = 0;
+  public int $total = 0;
 }
