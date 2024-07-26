@@ -15,14 +15,10 @@ use Flarum\Filter\FilterState;
 use Flarum\Query\QueryCriteria;
 use Foskym\IssueTracking\Model\DiscussionIssue;
 
-class HideIssuesFromAllDiscussionsPage
+class HideIssuesFromDiscussions
 {
     public function __invoke(FilterState $filter, QueryCriteria $queryCriteria)
     {
-        if (count($filter->getActiveFilters()) > 0) {
-            return;
-        }
-
         $filter->getQuery()->whereNotIn('discussions.id', function ($query) {
             return $query->select('discussion_id')
             ->from('discussion_issue');

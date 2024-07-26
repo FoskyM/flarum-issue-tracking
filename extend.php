@@ -22,7 +22,7 @@ use Flarum\Api\Serializer\DiscussionSerializer;
 use FoskyM\IssueTracking\Api\Serializer\IssueSerializer;
 use Flarum\Post\Event\Posted;
 use Flarum\Discussion\Filter\DiscussionFilterer;
-use FoskyM\IssueTracking\Filter\HideIssuesFromAllDiscussionsPage;
+use FoskyM\IssueTracking\Filter\HideIssuesFromDiscussions;
 
 return [
     (new Extend\Frontend('forum'))
@@ -67,7 +67,7 @@ return [
         ->listen(Posted::class, Listener\CreateCommentWhenPosted::class),
 
     (new Extend\Filter(DiscussionFilterer::class))
-        ->addFilterMutator(HideIssuesFromAllDiscussionsPage::class),
+        ->addFilterMutator(HideIssuesFromDiscussions::class),
 
     (new Extend\Settings())
         ->serializeToForum('foskym-issue-tracking.enable_create_issue', 'foskym-issue-tracking.enable_create_issue', 'boolval', false)
