@@ -73,6 +73,19 @@ export default class SettingsPage extends ExtensionPage {
             type: 'boolean',
             setting: 'foskym-issue-tracking.enable_auto_import',
             label: app.translator.trans('foskym-issue-tracking.admin.enable_auto_import_label'),
+            help: app.translator.trans('foskym-issue-tracking.admin.default_import_by_email_help'),
+          })}
+
+          {this.buildSettingComponent({
+            type: 'boolean',
+            setting: 'foskym-issue-tracking.enable_import_by_username',
+            label: app.translator.trans('foskym-issue-tracking.admin.enable_import_by_username_label'),
+          })}
+          
+          {this.buildSettingComponent({
+            type: 'boolean',
+            setting: 'foskym-issue-tracking.enable_import_by_display_name',
+            label: app.translator.trans('foskym-issue-tracking.admin.enable_import_by_display_name_label'),
           })}
 
           {this.buildSettingComponent({

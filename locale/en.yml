@@ -6,6 +6,9 @@ foskym-issue-tracking:
     enable_comment_sync_label: Create comments in the issue tracker when a post is created
     enable_create_issue_label: Allow users to create issues in Flarum
     enable_auto_import_label: Automatically import issues to Flarum while reading issues
+    enable_import_by_username_label: Import issues by username
+    enable_import_by_display_name_label: Import issues by display name
+    default_import_by_email_help: By default, issues are imported by email. You can enable importing by username or display name. Manual import settings are in sync with these two. If user does not exist, the issue will be imported by the manual actor or the default admin.
 
     action:
       heading: Action

@@ -70,7 +70,18 @@ class ImportIssuesController implements RequestHandlerInterface
                 $issue->discussion = $relationship->discussion;
                 $issue->discussion_id = $relationship->discussion_id;
             } catch (\Exception $e) {
-                $user = $actor;
+                try {
+                    $user = User::where('email', $issue->author->email);
+                    if ($this->settings->get('foskym-issue-tracking.enable_import_by_username') === '1') {
+                        $user->whereOr('username', $issue->author->username);
+                    }
+                    if ($this->settings->get('foskym-issue-tracking.enable_import_by_display_name') === '1') {
+                        $user->whereOr('nickname', $issue->author->display_name);
+                    }
+                    $user = $user->firstOrFail();
+                } catch (\Exception $e) {
+                    $user = $actor;
+                }
                 $discussion = Discussion::start($issue->title, $user);
         
                 $discussion->save();

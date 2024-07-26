@@ -11,11 +11,11 @@
 
 namespace FoskyM\IssueTracking;
 
-class AbstractProgress implements \ArrayAccess {
-  public $updated_at;
-  public int $resolved = 0;
-  public int $unresolved = 0;
-  public int $total = 0;
+class AbstractLabel implements \ArrayAccess {
+  public string $name;
+  public string $foreground;
+  public string $background;
+  public string $type;
   public function offsetExists(mixed $offset): bool {
     return isset($this->$offset);
   }

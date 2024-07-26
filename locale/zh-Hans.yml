@@ -4,6 +4,9 @@ foskym-issue-tracking:
     enable_comment_sync_label: 将 Flarum 中的评论同步至问题跟踪平台
     enable_create_issue_label: 允许用户在 Flarum 中创建问题
     enable_auto_import_label: 阅读问题列表时自动将平台的问题导入到 Flarum
+    enable_import_by_username_label: 通过用户名导入问题
+    enable_import_by_display_name_label: 通过显示名（昵称）导入问题
+    default_import_by_email_help: 默认情况下，问题通过邮箱导入。您可以启用通过用户名或显示名导入问题。手动导入设置与此二项同步。如果用户不存在，问题将由手动操作者或默认管理员导入。
 
     action:
       heading: 操作

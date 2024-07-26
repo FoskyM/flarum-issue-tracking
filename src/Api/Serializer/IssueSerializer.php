@@ -35,6 +35,7 @@ class IssueSerializer extends AbstractSerializer
             'title' => $issue->title,
             'description' => $issue->description,
             'author' => $issue->author,
+            'assignee' => $issue->assignee,
             'state' => $issue->state,
             'priority' => $issue->priority,
             'type' => $issue->type,

@@ -23,6 +23,7 @@ class Issue extends AbstractIssue {
     $this->title = $issue->title;
     $this->description = $issue->description;
     $this->author = $issue->author;
+    $this->assignee = $issue->assignee;
     $this->state = $issue->state;
     $this->priority = $issue->priority;
     $this->type = $issue->type;
