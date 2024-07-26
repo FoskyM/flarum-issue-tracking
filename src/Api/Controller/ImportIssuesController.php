@@ -73,10 +73,10 @@ class ImportIssuesController implements RequestHandlerInterface
                 try {
                     $user = User::where('email', $issue->author->email);
                     if ($this->settings->get('foskym-issue-tracking.enable_import_by_username') === '1') {
-                        $user->whereOr('username', $issue->author->username);
+                        $user->orWhere('username', $issue->author->username);
                     }
                     if ($this->settings->get('foskym-issue-tracking.enable_import_by_display_name') === '1') {
-                        $user->whereOr('nickname', $issue->author->display_name);
+                        $user->orWhere('nickname', $issue->author->display_name);
                     }
                     $user = $user->firstOrFail();
                 } catch (\Exception $e) {
