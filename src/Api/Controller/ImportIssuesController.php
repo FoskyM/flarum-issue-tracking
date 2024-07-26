@@ -57,7 +57,8 @@ class ImportIssuesController implements RequestHandlerInterface
 
         $sort = Arr::get($request->getQueryParams(), 'sort', 'latest');
 
-        $issues = $this->providerHelper->getProvider($provider)->getIssueList($sort);
+        $issues = $this->providerHelper->getProvider($provider)
+            ->getIssueList($sort, 0, 10000);
 
         $issues = array_map(function ($issue) use ($provider, $actor) {
             $issue = new Issue($issue);
