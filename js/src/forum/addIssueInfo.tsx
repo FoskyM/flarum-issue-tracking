@@ -13,12 +13,18 @@ export default function () {
   let issue: any;
   let loading = true;
   extend(DiscussionHero.prototype, 'oninit', function () {
+    if (this.attrs.discussion.data.relationships['discussion-issue'] === undefined) {
+      return;
+    }
     app.store.find('issue-tracking/issue?id=' + this.attrs.discussion.id()).then((data: any) => {
       issue = data;
       loading = false;
       if (issue.id() !== null) {
         m.redraw();
       }
+    }).catch(() => {
+      loading = false;
+      issue = {};
     });
   });
 
